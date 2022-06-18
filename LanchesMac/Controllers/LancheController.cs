@@ -13,15 +13,13 @@ namespace LanchesMac.Controllers
         {            
             var lanches = _lancheRepository.Lanches;
 
-            ViewData["titulo"] = "TODOS OS LANCHES";
-            ViewData["datahora"] = DateTime.Now;
+            //ViewData["titulo"] = "TODOS OS LANCHES";
+            //ViewData["datahora"] = DateTime.Now;
 
-            TempData["nome"] = "JBGaleao";
+            //TempData["nome"] = "JBGaleao";
 
-            ViewBag.texto = "Total de lanches listados: ";
-            ViewBag.total = lanches.Count();
-
-
+            //ViewBag.texto = "Total de lanches listados: ";
+            //ViewBag.total = lanches.Count();
 
             return View(lanches);
         }
