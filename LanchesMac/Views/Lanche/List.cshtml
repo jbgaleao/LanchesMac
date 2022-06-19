@@ -1,6 +1,6 @@
-﻿@model LancheListViewModel
+﻿@model IEnumerable<LanchesMac.Models.Lanche>
 
-<h2>@Model.Categoria</h2>
+<h2>Todos os Lanches</h2>
 <hr />
 
 @*<div>
@@ -14,7 +14,7 @@
 <h5>@TempData["nome"]</h5>*@
 <div class="container">
     <div class="row">
-        @foreach (var lanche in Model.Lanches)
+        @foreach (var lanche in Model)
         {
             <div class="col-sm-4 col-md-4 col-lg-4">
                 <div>
