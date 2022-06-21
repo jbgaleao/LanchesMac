@@ -22,7 +22,7 @@ namespace LanchesMac.Models
                 services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
 
             //obtem um servico do tipo do nosso contexto
-            var context = services.GetService<AppDbContext>();
+            AppDbContext context = services.GetService<AppDbContext>();
 
             // obtem ou gera o Id do carrinho 
             string carrinhoId = session.GetString("CarrinhoId") ??
@@ -38,9 +38,9 @@ namespace LanchesMac.Models
             };
         }
 
-        public void AdicionarCompraItem(Lanche lanche)
+        public void AdicionarAoCarrinho(Lanche lanche)
         {
-            var CarrinhoCompraItem =
+            CarrinhoCompraItem CarrinhoCompraItem =
                 _context.CarrinhoCompraItens.SingleOrDefault(
                     s => s.Lanche.LancheId == lanche.LancheId &&
                     s.CarrinhoCompraId == CarringoCompraId);
@@ -57,18 +57,18 @@ namespace LanchesMac.Models
             }
             else
             {
-                CarrinhoCompraItem.Quantidade = 1;
+                CarrinhoCompraItem.Quantidade++;
             }
             _context.SaveChanges();
         }
 
         public int RemoverDoCarrinho(Lanche lanche)
         {
-            var carrinhoCompraItem = _context.CarrinhoCompraItens.SingleOrDefault(
+            CarrinhoCompraItem carrinhoCompraItem = _context.CarrinhoCompraItens.SingleOrDefault(
                     s => s.Lanche.LancheId == lanche.LancheId &&
                     s.CarrinhoCompraId == CarringoCompraId);
             
-            var quantidadeLocal = 0;
+            int quantidadeLocal = 0;
             
             if (carrinhoCompraItem != null)
             {
@@ -84,6 +84,7 @@ namespace LanchesMac.Models
                 
             }
             _context.SaveChanges();
+
             return quantidadeLocal;
         }
     }
